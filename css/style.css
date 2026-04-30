@@ -334,6 +334,6 @@ body {
     bottom: 50px;
     font-size: 12px;
     padding: 8px 20px;
-    width: 50%;
+    width: fit-content;
   }
 }
