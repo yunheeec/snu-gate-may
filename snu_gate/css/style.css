@@ -1,0 +1,339 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  overflow: hidden;
+  font-family: "Sunflower", sans-serif;
+}
+
+#container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/images/정문광장.png");
+  background-size: cover;
+  background-position: center;
+}
+
+#webcamBox {
+  position: absolute;
+  top: 20px;
+  left: 85%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 180px;
+  border: 2px solid rgba(255, 200, 0, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  background: #000;
+}
+
+#webcam {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+#handCanvas,
+#threeCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#handCanvas {
+  pointer-events: none;
+}
+
+#ui {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 20;
+}
+
+#status {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  border: 1px solid rgba(255, 200, 0, 0.4);
+  color: #ffd700;
+  padding: 10px 28px;
+  border-radius: 40px;
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+#gestureFeedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Bagel Fat One", sans-serif;
+  font-size: 72px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.15s;
+  text-shadow: 0 0 40px rgba(255, 200, 0, 0.8);
+  pointer-events: none;
+}
+
+#scorePanel {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  min-width: 160px;
+  display: none;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 14px 20px;
+  color: #fff;
+}
+
+#scorePanel h3,
+#gestureGuide h3 {
+  font-size: 11px;
+  color: rgba(255, 200, 0, 0.7);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 4px 0;
+  font-size: 13px;
+}
+
+.score-val {
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+#gestureGuide {
+  position: absolute;
+  top: 20px;
+  left: 24px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 200, 0, 0.3);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 14px 20px;
+  color: #fff;
+}
+
+.gesture-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.gesture-icon {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+}
+
+#loading {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+    url("../assets/images/정문광장.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #ffd700;
+  font-size: 18px;
+  z-index: 100;
+}
+
+#loadingLogo img {
+  width: 280px;
+  max-width: 70vw;
+  height: auto;
+  display: block;
+}
+
+#loadBar {
+  width: 240px;
+  height: 3px;
+  background: rgba(255, 200, 0, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#loadFill {
+  height: 100%;
+  width: 0%;
+  background: #ffd700;
+  transition: width 0.3s;
+  border-radius: 2px;
+}
+
+#loadText {
+  font-size: 13px;
+  color: rgba(255, 200, 0, 0.75);
+}
+
+#gestureDebug {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  padding: 4px 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  pointer-events: none;
+  display: none;
+}
+
+#blastCharge {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 6px;
+  background: rgba(255, 200, 0, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.2s;
+}
+
+#blastChargeFill {
+  height: 100%;
+  width: 0%;
+  background: #ffd700;
+  transition: width 0.05s;
+  border-radius: 3px;
+  display: none;
+}
+
+#gestureBtn {
+  display: none;
+}
+
+#gestureModal {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #webcamBox {
+    top: 10px;
+    right: 10px;
+    left: auto;
+    transform: none;
+    width: 160px;
+    height: 120px;
+  }
+
+  #gestureGuide {
+    display: none;
+  }
+
+  #gestureBtn {
+    display: flex;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 200, 0, 0.5);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    pointer-events: auto;
+    z-index: 30;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #gestureModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 50;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+  }
+
+  #gestureModal.open {
+    display: flex;
+  }
+
+  #gestureModalBox {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 200, 0, 0.4);
+    border-radius: 16px;
+    padding: 20px 24px;
+    color: white;
+    position: relative;
+    min-width: 260px;
+  }
+
+  #gestureModalBox h3 {
+    color: rgba(255, 200, 0, 0.8);
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+
+  #gestureClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #gestureFeedback {
+    font-size: 40px;
+  }
+
+  #status {
+    bottom: 50px;
+    font-size: 12px;
+    padding: 8px 20px;
+    width: 50%;
+  }
+}

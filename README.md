@@ -1,1 +1,0 @@
-# snu-gate-may

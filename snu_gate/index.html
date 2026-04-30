@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>샤랑 놀자!</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle&family=Jua&family=Sunflower:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="container">
+      <canvas id="threeCanvas"></canvas>
+
+      <div id="webcamBox">
+        <video id="webcam" autoplay playsinline muted></video>
+        <canvas id="handCanvas"></canvas>
+      </div>
+
+      <div id="ui">
+        <!-- 모바일 버튼 -->
+        <button id="gestureBtn">❓</button>
+
+        <!-- 모바일 모달 -->
+        <div id="gestureModal">
+          <div id="gestureModalBox">
+            <h3>제스처 가이드</h3>
+            <button id="gestureClose">✕</button>
+            <div class="gesture-row">
+              <span class="gesture-icon">👐</span>
+              장풍 발사! 손바닥을 카메라 쪽으로 밀어보세요
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">👍</span>
+              따봉 정문아 고마워! 엄지 척~
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">🫶</span>
+              두 손으로 하트를 만들어보세요
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">☝️</span>
+              검지를 들어서 톡 쳐보세요!
+            </div>
+          </div>
+        </div>
+
+        <!-- 데스크톱 가이드 (기존 그대로) -->
+        <div id="gestureGuide">
+          <h3>제스처 가이드</h3>
+          <div class="gesture-rows">
+            <div class="gesture-row">
+              <span class="gesture-icon">👐</span>
+              장풍 발사! 손바닥을 카메라 쪽으로 밀어보세요
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">👍</span>
+              따봉 정문아 고마워! 엄지 척~
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">🫶</span>
+              두 손으로 하트를 만들어보세요
+            </div>
+            <div class="gesture-row">
+              <span class="gesture-icon">☝️</span>
+              검지를 들어서 톡 쳐보세요!
+            </div>
+          </div>
+        </div>
+
+        <div id="scorePanel">
+          <h3>기록</h3>
+          <div class="score-row">
+            <span>장풍</span><span class="score-val" id="cnt-blast">0</span>
+          </div>
+          <div class="score-row">
+            <span>던지기</span><span class="score-val" id="cnt-throw">0</span>
+          </div>
+          <div class="score-row">
+            <span>따봉</span><span class="score-val" id="cnt-thumbs">0</span>
+          </div>
+          <div class="score-row">
+            <span>두손하트</span><span class="score-val" id="cnt-heart">0</span>
+          </div>
+          <div class="score-row">
+            <span>빙글</span><span class="score-val" id="cnt-spin">0</span>
+          </div>
+        </div>
+
+        <div id="gestureFeedback"></div>
+        <div id="status">카메라 연결 중...</div>
+        <div id="gestureDebug"></div>
+        <div id="blastCharge"><div id="blastChargeFill"></div></div>
+      </div>
+
+      <div id="loading">
+        <div id="loadingLogo">
+          <img src="./assets/images/logo.png" alt="샤랑 놀자!" />
+        </div>
+
+        <div id="loadBar"><div id="loadFill"></div></div>
+        <div id="loadText">모델 로딩 중...</div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>
