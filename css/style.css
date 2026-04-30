@@ -328,6 +328,7 @@ body {
 
   #gestureFeedback {
     font-size: 40px;
+    white-space: nowrap;
   }
 
   #status {
