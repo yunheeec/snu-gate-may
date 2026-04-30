@@ -14,7 +14,7 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
-  background-image: url("../assets/images/정문광장.png");
+  background-image: url("../assets/images/정문광장.webp");
   background-size: cover;
   background-position: center;
 }
@@ -254,12 +254,12 @@ body {
 
 @media (max-width: 768px) {
   #webcamBox {
-    top: 10px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     left: auto;
     transform: none;
-    width: 160px;
-    height: 120px;
+    width: 200px;
+    height: 140px;
   }
 
   #gestureGuide {

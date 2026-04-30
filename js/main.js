@@ -42,7 +42,7 @@ camera.position.set(0, 3.2, isMobile ? 25 : 16.5);
 camera.lookAt(0, 2, 0);
 const BG_IMG_W = 5428;
 const BG_IMG_H = 3616;
-const BG_ANCHOR_Y = 0.73; // 정문 바닥 위치
+const BG_ANCHOR_Y = 0.75; // 정문 바닥 위치
 function buildEnvMap() {
   const pmrem = new THREE.PMREMGenerator(renderer);
   const envScene = new THREE.Scene();
@@ -1174,11 +1174,18 @@ function drawHand(lms) {
   }
 }
 
-window.addEventListener("load", () => {
-  const guide = document.getElementById("gestureGuide");
-  const h3 = document.querySelector("#gestureGuide h3");
-  if (window.innerWidth <= 768) {
-    guide.style.width = h3.scrollWidth + 24 + "px";
+window.addEventListener("resize", () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+  const isMobile = window.innerWidth <= 768;
+  camera.position.z = isMobile ? 26 : 16.5;
+
+  if (gateGroup) {
+    // ← 추가
+    placeGateAtScreen();
+    gateOrigPos.copy(gateGroup.position); // ← idle 조건 없이 항상 업데이트
   }
 });
 
